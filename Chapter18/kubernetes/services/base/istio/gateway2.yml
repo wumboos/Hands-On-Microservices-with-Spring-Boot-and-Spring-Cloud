@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: hands-on-gw
+  namespace: hands-on
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - 'minikube.me'
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+    - hosts:
+      - 'minikube.me'
+      port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: coba-secrets-tls # must be the same as secret

@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: auth-server-vs
+  namespace: hands-on
+spec:
+  hosts:
+  - 'minikube.me'
+  gateways:
+  - hands-on-gw
+  http:
+  - match:
+    - uri:
+        prefix: "/oauth"
+    route:
+    - destination:
+        port:
+          number: 80
+        host: auth-server
+
